@@ -1,0 +1,232 @@
+PART- A
+--------------------------------------------------
+WEEK 6 ML REVIEW NOTEBOOK
+--------------------------------------------------
+
+ALGORITHM QUICK REFERENCE
+
+--------------------------------------------------
+
+1. LOGISTIC REGRESSION (LR)
+Description: Linear model for classification
+When to use: Linearly separable data
+
+Code:
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression(C=1.0)
+model.fit(X, y)
+
+Hyperparameters: C, penalty  
+Use case: Spam detection
+
+--------------------------------------------------
+
+2. DECISION TREE (DT)
+Description: Tree-based model for decision rules
+When to use: Interpretable models
+
+Code:
+from sklearn.tree import DecisionTreeClassifier
+model = DecisionTreeClassifier(max_depth=5)
+model.fit(X, y)
+
+Hyperparameters: max_depth, min_samples_split  
+Use case: Credit risk analysis
+
+--------------------------------------------------
+
+3. RANDOM FOREST (RF)
+Description: Ensemble of decision trees
+When to use: Reduce overfitting
+
+Code:
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier(n_estimators=100)
+model.fit(X, y)
+
+Hyperparameters: n_estimators, max_depth  
+Use case: Fraud detection
+
+--------------------------------------------------
+
+4. ADABOOST
+Description: Boosting weak learners
+When to use: Improve weak models
+
+Code:
+from sklearn.ensemble import AdaBoostClassifier
+model = AdaBoostClassifier(n_estimators=50)
+model.fit(X, y)
+
+Hyperparameters: n_estimators, learning_rate  
+Use case: Face detection
+
+--------------------------------------------------
+
+5. XGBOOST
+Description: Gradient boosting optimized
+When to use: High performance tasks
+
+Code:
+from xgboost import XGBClassifier
+model = XGBClassifier(n_estimators=100)
+model.fit(X, y)
+
+Hyperparameters: n_estimators, learning_rate  
+Use case: Kaggle competitions
+
+--------------------------------------------------
+
+6. LIGHTGBM
+Description: Fast gradient boosting
+When to use: Large datasets
+
+Code:
+from lightgbm import LGBMClassifier
+model = LGBMClassifier(n_estimators=100)
+model.fit(X, y)
+
+Hyperparameters: num_leaves, learning_rate  
+Use case: Large-scale classification
+
+--------------------------------------------------
+
+7. VOTING CLASSIFIER
+Description: Combines multiple models
+When to use: Improve accuracy
+
+Code:
+from sklearn.ensemble import VotingClassifier
+model = VotingClassifier(estimators=[])
+model.fit(X, y)
+
+Hyperparameters: voting, estimators  
+Use case: Ensemble systems
+
+--------------------------------------------------
+
+8. STACKING
+Description: Combines models using meta-learner
+When to use: Complex patterns
+
+Code:
+from sklearn.ensemble import StackingClassifier
+model = StackingClassifier(estimators=[], final_estimator=LogisticRegression())
+model.fit(X, y)
+
+Hyperparameters: estimators, final_estimator  
+Use case: Advanced ensembles
+
+--------------------------------------------------
+
+9. SVM
+Description: Finds optimal margin
+When to use: High-dimensional data
+
+Code:
+from sklearn.svm import SVC
+model = SVC(kernel='rbf')
+model.fit(X, y)
+
+Hyperparameters: C, kernel  
+Use case: Text classification
+
+--------------------------------------------------
+
+10. KNN
+Description: Distance-based classifier
+When to use: Small datasets
+
+Code:
+from sklearn.neighbors import KNeighborsClassifier
+model = KNeighborsClassifier(n_neighbors=5)
+model.fit(X, y)
+
+Hyperparameters: n_neighbors, metric  
+Use case: Recommendation systems
+
+--------------------------------------------------
+
+11. K-MEANS
+Description: Clustering algorithm
+When to use: Unlabeled data
+
+Code:
+from sklearn.cluster import KMeans
+model = KMeans(n_clusters=3)
+model.fit(X)
+
+Hyperparameters: n_clusters, init  
+Use case: Customer segmentation
+
+--------------------------------------------------
+
+12. DBSCAN
+Description: Density-based clustering
+When to use: Arbitrary shapes
+
+Code:
+from sklearn.cluster import DBSCAN
+model = DBSCAN(eps=0.5)
+model.fit(X)
+
+Hyperparameters: eps, min_samples  
+Use case: Anomaly detection
+
+--------------------------------------------------
+
+13. PCA
+Description: Dimensionality reduction
+When to use: High-dimensional data
+
+Code:
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+X_reduced = pca.fit_transform(X)
+
+Hyperparameters: n_components, svd_solver  
+Use case: Visualization
+
+--------------------------------------------------
+
+ALGORITHM SELECTION FLOWCHART
+
+Start
+|
+|-- Supervised?
+|     |-- Yes → Classification or Regression?
+|            |-- Linear → Logistic Regression
+|            |-- Non-linear → Tree / RF / Boosting
+|            |-- High-dim → SVM
+|            |-- Small data → KNN
+|
+|-- No → Clustering?
+      |-- Known K → K-Means
+      |-- Unknown shape → DBSCAN
+      |-- Hierarchy needed → Agglomerative
+|
+|-- Dimensionality Reduction → PCA
+
+--------------------------------------------------
+
+TESTING ON WINE DATASET
+
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+data = load_wine()
+X = data.data
+y = data.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+lr = LogisticRegression(max_iter=1000).fit(X_train, y_train)
+dt = DecisionTreeClassifier().fit(X_train, y_train)
+rf = RandomForestClassifier().fit(X_train, y_train)
+
+print(accuracy_score(y_test, lr.predict(X_test)))
+print(accuracy_score(y_test, dt.predict(X_test)))
+print(accuracy_score(y_test, rf.predict(X_test)))
+
+--------------------------------------------------

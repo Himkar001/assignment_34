@@ -1,0 +1,120 @@
+PART C: INTERVIEW READY (PIPELINE + CODING + ANALYSIS)
+
+--------------------------------------------------
+
+Q1: CONCEPTUAL
+
+QUESTION:
+Design a full ML pipeline for dataset with 1000 samples and 200 features.
+
+ANSWER:
+
+1. Data Preprocessing:
+- Handle missing values, scaling
+- Use StandardScaler for feature normalization
+
+2. Dimensionality Reduction:
+- Apply PCA to reduce 200 → ~50 features
+- Helps reduce noise and improve speed
+
+3. Model Selection:
+
+Logistic Regression:
+- Baseline model
+- Fast and interpretable
+
+Random Forest:
+- Handles non-linearity
+- Reduces overfitting
+
+XGBoost:
+- High performance boosting
+- Captures complex patterns
+
+SVM:
+- Works well in high-dimensional space
+
+KNN:
+- Simple distance-based comparison
+
+4. Model Evaluation:
+- Use cross-validation (5-fold)
+- Metrics: accuracy, F1-score
+
+5. Deployment:
+- Save model using pickle
+- Serve via API (FastAPI)
+
+--------------------------------------------------
+
+Q2: CODING
+
+CODE:
+
+import pandas as pd
+from sklearn.model_selection import cross_val_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from xgboost import XGBClassifier
+
+def weekly_model_comparison(X, y, use_pca=False):
+    models = {
+        "LR": LogisticRegression(max_iter=1000),
+        "RF": RandomForestClassifier(),
+        "XGB": XGBClassifier(use_label_encoder=False, eval_metric='logloss'),
+        "SVM": SVC(),
+        "KNN": KNeighborsClassifier()
+    }
+
+    results = []
+
+    for name, model in models.items():
+        steps = [("scaler", StandardScaler())]
+
+        if use_pca:
+            steps.append(("pca", PCA(n_components=0.95)))
+
+        steps.append(("model", model))
+
+        pipeline = Pipeline(steps)
+
+        scores = cross_val_score(pipeline, X, y, cv=5)
+
+        results.append({
+            "Model": name,
+            "Mean Accuracy": scores.mean()
+        })
+
+    return pd.DataFrame(results).sort_values(by="Mean Accuracy", ascending=False)
+
+--------------------------------------------------
+
+Q3: ANALYSIS
+
+QUESTION:
+PCA reduces 100 features → 10 (95% variance) but accuracy drops.
+
+ANSWER:
+
+1. Loss of Important Information:
+- PCA keeps variance, not necessarily predictive features
+
+2. Class-Separability Loss:
+- Features useful for classification may have low variance
+
+3. Over-compression:
+- Reducing too many dimensions removes useful signals
+
+--------------------------------------------------
+
+CONCLUSION:
+
+- PCA is not always beneficial for supervised tasks
+- Always validate impact on model performance
+
+--------------------------------------------------

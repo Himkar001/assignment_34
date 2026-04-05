@@ -1,0 +1,139 @@
+PART D: WEEK 6 STUDY GUIDE (AI-AUGMENTED)
+
+--------------------------------------------------
+
+OBJECTIVE:
+Comprehensive study guide covering all algorithms, key concepts, interview questions, and code patterns.
+
+--------------------------------------------------
+
+1. LOGISTIC REGRESSION
+Concept: Linear classifier using sigmoid
+Key: Decision boundary, probability output
+Interview Q: Why use sigmoid?
+Code: LogisticRegression().fit(X,y)
+
+--------------------------------------------------
+
+2. DECISION TREE
+Concept: Tree splits using Gini/Entropy
+Key: Overfitting, pruning
+Interview Q: Gini vs Entropy?
+Code: DecisionTreeClassifier().fit(X,y)
+
+--------------------------------------------------
+
+3. RANDOM FOREST
+Concept: Ensemble of trees (bagging)
+Key: Reduces variance
+Interview Q: Why better than single tree?
+Code: RandomForestClassifier().fit(X,y)
+
+--------------------------------------------------
+
+4. ADABOOST
+Concept: Boosting weak learners sequentially
+Key: Focus on misclassified points
+Interview Q: How weights update?
+Code: AdaBoostClassifier().fit(X,y)
+
+--------------------------------------------------
+
+5. XGBOOST
+Concept: Gradient boosting optimized
+Key: Regularization, speed
+Interview Q: Why popular?
+Code: XGBClassifier().fit(X,y)
+
+--------------------------------------------------
+
+6. LIGHTGBM
+Concept: Leaf-wise boosting
+Key: Faster than XGBoost
+Interview Q: When to use?
+Code: LGBMClassifier().fit(X,y)
+
+--------------------------------------------------
+
+7. VOTING
+Concept: Combine models
+Key: Hard vs Soft voting
+Interview Q: When useful?
+Code: VotingClassifier().fit(X,y)
+
+--------------------------------------------------
+
+8. STACKING
+Concept: Meta-model over base models
+Key: Multi-level learning
+Interview Q: Difference from voting?
+Code: StackingClassifier().fit(X,y)
+
+--------------------------------------------------
+
+9. SVM
+Concept: Max margin classifier
+Key: Kernel trick
+Interview Q: What is kernel?
+Code: SVC().fit(X,y)
+
+--------------------------------------------------
+
+10. KNN
+Concept: Distance-based learning
+Key: Lazy learner
+Interview Q: Effect of K?
+Code: KNeighborsClassifier().fit(X,y)
+
+--------------------------------------------------
+
+11. K-MEANS
+Concept: Clustering using centroids
+Key: Inertia, K selection
+Interview Q: Why sensitive to init?
+Code: KMeans().fit(X)
+
+--------------------------------------------------
+
+12. DBSCAN
+Concept: Density-based clustering
+Key: Noise detection
+Interview Q: Advantage over K-Means?
+Code: DBSCAN().fit(X)
+
+--------------------------------------------------
+
+13. PCA
+Concept: Dimensionality reduction
+Key: Variance preservation
+Interview Q: Why before ML?
+Code: PCA().fit_transform(X)
+
+--------------------------------------------------
+
+COMMON INTERVIEW PATTERNS:
+
+- Bias vs Variance
+- Overfitting vs Underfitting
+- Cross-validation
+- Feature scaling importance
+
+--------------------------------------------------
+
+MISSING / IMPORTANT CONCEPTS:
+
+- Hyperparameter tuning (GridSearchCV)
+- Pipeline usage
+- Evaluation metrics (precision, recall, F1)
+- Feature engineering
+
+--------------------------------------------------
+
+FINAL STUDY PLAN:
+
+1. Revise concepts
+2. Practice coding
+3. Solve interview questions
+4. Review mistakes
+
+--------------------------------------------------

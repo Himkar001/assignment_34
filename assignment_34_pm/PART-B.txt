@@ -1,0 +1,105 @@
+PART B: IMAGE COMPRESSION USING PCA
+
+--------------------------------------------------
+
+OBJECTIVE:
+Apply PCA for image compression and evaluate reconstruction quality.
+
+--------------------------------------------------
+
+STEP 5: LOAD IMAGE
+
+CODE:
+import matplotlib.pyplot as plt
+import numpy as np
+
+img = plt.imread('image.jpg')
+img = img / 255.0
+
+--------------------------------------------------
+
+STEP 6: FLATTEN COLOR CHANNELS
+
+CODE:
+R = img[:, :, 0]
+G = img[:, :, 1]
+B = img[:, :, 2]
+
+--------------------------------------------------
+
+STEP 7: APPLY PCA WITH DIFFERENT COMPONENTS
+
+CODE:
+from sklearn.decomposition import PCA
+
+components = [5, 20, 50, 100]
+
+reconstructed_images = []
+
+for k in components:
+    pca_r = PCA(n_components=k)
+    pca_g = PCA(n_components=k)
+    pca_b = PCA(n_components=k)
+
+    R_k = pca_r.fit_transform(R)
+    G_k = pca_g.fit_transform(G)
+    B_k = pca_b.fit_transform(B)
+
+    R_rec = pca_r.inverse_transform(R_k)
+    G_rec = pca_g.inverse_transform(G_k)
+    B_rec = pca_b.inverse_transform(B_k)
+
+    img_rec = np.stack((R_rec, G_rec, B_rec), axis=2)
+    reconstructed_images.append(img_rec)
+
+--------------------------------------------------
+
+STEP 8: DISPLAY IMAGES
+
+CODE:
+plt.figure(figsize=(10, 8))
+
+for i, img_rec in enumerate(reconstructed_images):
+    plt.subplot(2, 2, i+1)
+    plt.imshow(img_rec)
+    plt.title(f'Components = {components[i]}')
+    plt.axis('off')
+
+plt.show()
+
+--------------------------------------------------
+
+STEP 9: COMPRESSION RATIO & MSE
+
+CODE:
+def mse(original, compressed):
+    return np.mean((original - compressed) ** 2)
+
+original_size = img.size
+
+for i, k in enumerate(components):
+    compressed_size = k * (R.shape[0] + R.shape[1]) * 3
+    ratio = original_size / compressed_size
+    error = mse(img, reconstructed_images[i])
+
+    print(f'Components: {k}')
+    print(f'Compression Ratio: {round(ratio, 2)}')
+    print(f'MSE: {round(error, 5)}')
+    print()
+
+--------------------------------------------------
+
+EXPECTED OBSERVATIONS:
+
+- Low components (5): High compression, poor quality
+- Medium (20–50): Balance between quality and size
+- High (100): Better quality, less compression
+
+--------------------------------------------------
+
+CONCLUSION:
+
+PCA reduces dimensionality by keeping important features.
+Higher components improve quality but reduce compression efficiency.
+
+--------------------------------------------------
