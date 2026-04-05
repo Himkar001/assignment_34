@@ -1,7 +1,7 @@
-# Assignment 32 – AM & PM Session 
+# Assignment 34 – AM & PM Session 
 
 ## Overview
-This document consolidates all parts of Assignment 32 in a structured manner, covering both AM and PM sessions. It includes explanations, code snippets, and outputs for each task in a clear, step-by-step format suitable for revision and submission.
+This document consolidates all parts of Assignment 34 in a structured manner, covering both AM and PM sessions. It includes explanations, code snippets, and outputs for each task in a clear, step-by-step format suitable for revision and submission.
 
 ---
 
@@ -201,7 +201,7 @@ from sklearn.datasets import load_sample_image
 from sklearn.decomposition import PCA
 import numpy as np
 
-img = load_sample_image("china.jpg") / 255.0
+img = load_sample_image("image.jpg") / 255.0
 
 R, G, B = img[:,:,0], img[:,:,1], img[:,:,2]
 
